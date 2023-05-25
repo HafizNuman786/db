@@ -1,118 +1,197 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
-
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import Image from "next/image";
+import Link from "next/link";
+import { GoogleIcon } from "@/assets/Google";
+import { FaceBookIcon } from "@/assets/Facebook";
+import { TwitterIcon } from "@/assets/Twitter";
+import { AppleIcon } from "@/assets/AppleIcon";
+import axios from "axios";
 export default function Home() {
+
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const onSubmit = async (data) => {
+    await axios.post("/api/user/Signup", data);
+    console.log(data);
+  };
+  // const onSubmit = async () => {
+  //   try {
+  //     const res = await axios.post(
+  //       'https://api.ote-godaddy.com/v1/domains/available',
+  //       ['example.guru'],
+  //       {
+  //         headers: {
+  //           'Authorization': 'sso-key 3mM44Uch7Rjz9N_SUZxTk4Vp3KopHWfZee3Bn:CyfZSX4YzobL47GRw3juvy',
+  //           'Content-Type': 'application/json',
+  //         },
+  //       }
+  //     );
+  //     console.log(res)
+  //     // res.status(200).json(response.data);
+  //   } catch (error) {
+  //     console.error(error);
+  //     // res.status(500).json({ error: 'Internal Server Error' });
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   onSubmit()
+  // }, [])
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    >
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">pages/index.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+
+    <div className="relative w-full h-screen overflow-hidden flex items-center justify-center">
+      <div className="flex  w-4/5 place-items-center  align-middle lg:max-w-screen-lg xl:max-w-screen-xl">
+        <div className="col-span-12 m-auto grid grid-cols-12 rounded-2xl bg-white shadow-2xl sm:col-span-12 md:col-span-12 lg:col-span-12">
+          <div className="z-10 col-span-12 grid grid-cols-12 text-center sm:col-span-12 md:col-span-12 lg:col-span-12">
+            <div className="md-col-span-12 z-10 col-span-12 block px-5 py-5 sm:col-span-12 md:grid lg:col-span-8 lg:px-20 lg:py-10 xl:col-span-8">
+              <div className="col-span-12 m-auto  text-center">
+                <Image
+                  width={1000}
+                  height={1000}
+                  src="/logo.png"
+                  alt="Logo"
+                  layout="responsive"
+                  objectFit="contain"
+                  objectPosition="center"
+                  className=" w-40 md:mx-auto md:w-60"
+                />
+
+                <h1 className=" text-2xl font-bold text-gray-700">
+                  Create Account
+                </h1>
+              </div>
+              <form onSubmit={handleSubmit(onSubmit)} className="z-10 col-span-12 grid">
+                <div className="text-left">
+                  <label
+                    htmlFor="name"
+                    className="mb-2 ml-4 block font-medium text-gray-600"
+                  >
+                    Your Name
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    {...register("UserName")}
+                    placeholder="Add your name here"
+                    className="mb-2 block w-full rounded-md border-gray-300 bg-gray-100 px-3 py-2 pl-4 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm lg:text-base"
+                  />
+                </div>
+                <div className="text-left">
+                  <label
+                    htmlFor="name"
+                    className="mb-2 ml-4 block font-medium text-gray-600"
+                  >
+                    Your Mobile Number
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    {...register("UserMobileNumber")}
+                    placeholder="Add your mobile number here"
+                    className="mb-2 block w-full rounded-md border-gray-300 bg-gray-100 px-3 py-2 pl-4 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm lg:text-base"
+                  />
+                </div>
+                <div className="text-left">
+                  <label
+                    htmlFor="name"
+                    className="mb-2 ml-4 block font-medium text-gray-600"
+                  >
+                    Your Email Here
+                  </label>
+                  <input
+                    type="email"
+                    id="name"
+                    name="name"
+                    required
+                    {...register("UserEmail")}
+                    placeholder="Add your email here"
+                    className="mb-2 block w-full rounded-md border-gray-300 bg-gray-100 px-3 py-2 pl-4 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm lg:text-base"
+                  />
+                </div>
+                <div className="text-left">
+                  <label
+                    htmlFor="password"
+                    className="mb-2 ml-4 block font-medium text-gray-600"
+                  >
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    required
+                    {...register("UserPassword")}
+                    placeholder="Enter your Password"
+                    className="mb-2 block w-full rounded-md border-gray-300 bg-gray-100 px-3 py-2 pl-4 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm lg:text-base"
+                  />
+                </div>
+                <div className="mb-5 flex items-center justify-start">
+                  <div className="flex items-center">
+                    <p className="text-sm font-medium">
+                      Already Register
+                      <Link
+                        href="#"
+                        className="ml-1 text-sm font-medium text-blue-500 hover:text-blue-700"
+                      >
+                        Sign in
+                      </Link>
+                    </p>
+                  </div>
+                </div>
+                <div>
+                  <button
+                    type="submit"
+                    className="m-auto w-1/2 rounded-md border border-transparent bg-teal-500 px-4 py-2 text-white shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                  >
+                    Create Account
+                  </button>
+                </div>
+              </form>
+              <div className="z-10 col-span-12 m-auto mt-7 text-center">
+                <div className="block items-center justify-center sm:flex">
+                  <span className="m-0 block h-px w-full bg-black sm:mr-5 sm:flex sm:w-40"></span>
+                  <span className="text-center text-lg text-black">
+                    Or Continue with
+                  </span>
+                  <span className="m-0 block h-px w-full bg-black sm:ml-5 sm:flex sm:w-40"></span>
+                </div>
+                <div className="mt-7 flex flex-wrap  justify-center">
+                  <Link href="#" className="mr-2 h-8 w-8 sm:mr-10">
+                    {/* Google */}
+                    <GoogleIcon width={50} height={30} />
+                  </Link>
+                  <Link href="#" className="mr-2 h-8 w-8 sm:mr-10">
+                    {/* Facebook */}
+                    <FaceBookIcon width={50} height={30} />
+                  </Link>
+                  <Link href="#" className="mr-2 h-8 w-8 sm:mr-10">
+                    {/* Twitter */}
+                    <TwitterIcon width={50} height={30} />
+                  </Link>
+                  <Link href="#" className="mr-2 h-8 w-8 sm:mr-10">
+                    {/* Apple */}
+                    <AppleIcon width={50} height={30} />
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <div className="md-col-span-12 col-span-12 grid rounded-bl-2xl rounded-br-2xl bg-teal-500 px-10 py-10 sm:col-span-12 md:rounded-bl-2xl md:rounded-tr-none lg:col-span-4 lg:rounded-bl-none lg:rounded-tr-2xl xl:col-span-4">
+              <Image
+                width={1000}
+                height={1000}
+                src="/login.png"
+                alt="sidebar"
+                className="m-auto"
+              />
+            </div>
+          </div>
         </div>
       </div>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Discover and deploy boilerplate example Next.js&nbsp;projects.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+    </div>
+  );
 }
