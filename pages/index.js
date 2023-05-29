@@ -14,29 +14,7 @@ export default function Home() {
     await axios.post("/api/user/Signup", data);
     console.log(data);
   };
-  // const onSubmit = async () => {
-  //   try {
-  //     const res = await axios.post(
-  //       'https://api.ote-godaddy.com/v1/domains/available',
-  //       ['example.guru'],
-  //       {
-  //         headers: {
-  //           'Authorization': 'sso-key 3mM44Uch7Rjz9N_SUZxTk4Vp3KopHWfZee3Bn:CyfZSX4YzobL47GRw3juvy',
-  //           'Content-Type': 'application/json',
-  //         },
-  //       }
-  //     );
-  //     console.log(res)
-  //     // res.status(200).json(response.data);
-  //   } catch (error) {
-  //     console.error(error);
-  //     // res.status(500).json({ error: 'Internal Server Error' });
-  //   }
-  // }
 
-  // useEffect(() => {
-  //   onSubmit()
-  // }, [])
   return (
 
     <div className="relative w-full h-screen overflow-hidden flex items-center justify-center">
